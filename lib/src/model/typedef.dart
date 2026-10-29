@@ -75,7 +75,7 @@ abstract class Typedef extends ModelElement with TypeParameters, HasLibrary {
     buffer.writeAll(
         typeParameters.map((t) => [
               ...t.annotations.map((a) => a.linkedNameWithParameters),
-              isLinked ? t.linkedName : t.name,
+              isLinked ? t.linkedNameWithBound : t.nameWithBound,
             ].join(' ')),
         '</span>, <span class="type-parameter">');
     buffer.write('</span>&gt;');

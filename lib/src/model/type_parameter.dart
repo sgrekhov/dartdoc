@@ -36,14 +36,18 @@ class TypeParameter extends ModelElement with HasNoPage {
   bool get hasParameters => false;
 
   @override
-  String get name => element.bound != null
-      ? '${element.name} extends ${boundType!.nameWithGenerics}'
-      : element.name!;
+  String get name => element.name!;
 
-  @override
-  String get linkedName => element.bound != null
-      ? '${element.name} extends ${boundType!.linkedName}'
-      : element.name!;
+  /// The name of this type parameter, followed by its bound, if any.
+  ///
+  /// For example, `T` or `T extends num`.
+  String get nameWithBound => element.bound != null
+      ? '$name extends ${boundType!.nameWithGenerics}'
+      : name;
+
+  /// The name of this type parameter, followed by its linked bound, if any.
+  String get linkedNameWithBound =>
+      element.bound != null ? '$name extends ${boundType!.linkedName}' : name;
 
   @override
   late final Map<String, Referable> referenceChildren = () {
@@ -80,7 +84,7 @@ mixin TypeParameters implements ModelElement {
     var joined = typeParameters
         .map((t) => [
               ...t.annotations.map((a) => a.linkedNameWithParameters),
-              isLinked ? t.linkedName : t.name
+              isLinked ? t.linkedNameWithBound : t.nameWithBound
             ].join(' '))
         .join('</span>, <span class="type-parameter">');
     var typeParametersString =

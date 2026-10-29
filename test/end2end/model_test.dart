@@ -2034,10 +2034,8 @@ void main() async {
       setUpAll(() {
         aTopLevelTypeParameterFunction =
             fakeLibrary.functions.named('aTopLevelTypeParameterFunction');
-        // TODO(jcollins-g): dart-lang/dartdoc#2704, HTML and type parameters
-        // on the extended type should not be present here.
-        DTypeParam = aTopLevelTypeParameterFunction.typeParameters.firstWhere(
-            (t) => t.name.startsWith('DTypeParam extends TypeParameterThings'));
+        DTypeParam =
+            aTopLevelTypeParameterFunction.typeParameters.named('DTypeParam');
         typedParam =
             aTopLevelTypeParameterFunction.parameters.named('typedParam');
 
@@ -2051,8 +2049,7 @@ void main() async {
         anotherParam = aMethod.parameters.named('anotherParam');
 
         ATypeParam = TypeParameterThings.typeParameters.named('ATypeParam');
-        BTypeParam = TypeParameterThings.typeParameters
-            .named('BTypeParam extends FactoryConstructorThings');
+        BTypeParam = TypeParameterThings.typeParameters.named('BTypeParam');
 
         TypeParameterThingsExtended =
             fakeLibrary.classes.named('TypeParameterThingsExtended');

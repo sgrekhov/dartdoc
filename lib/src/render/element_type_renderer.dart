@@ -92,12 +92,13 @@ class FunctionTypeElementTypeRendererHtml
         if (plain) {
           buffer
             ..write('<')
-            ..writeAll(elementType.typeFormals.map((t) => t.name), ', ')
+            ..writeAll(
+                elementType.typeFormals.map((t) => t.nameWithBound), ', ')
             ..write('>');
         } else {
           buffer
             ..write('&lt;<wbr><span class="type-parameter">')
-            ..writeAll(elementType.typeFormals.map((t) => t.name),
+            ..writeAll(elementType.typeFormals.map((t) => t.nameWithBound),
                 '</span>, <span class="type-parameter">')
             ..write('</span>&gt;');
         }
